@@ -4,6 +4,7 @@ members = [
     "msi/runtime",
     "msi/compiler",
     "agent/core",
+    "agent/mcp",
     "radio/telephony",
 ]
 
