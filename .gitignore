@@ -1,0 +1,57 @@
+# Build outputs
+out/
+build/output/
+*.o
+*.ko
+*.mod
+*.mod.c
+*.cmd
+*.a
+*.so
+*.dylib
+
+# AOSP
+.repo/
+prebuilts/
+external/
+bionic/
+
+# Vendor blobs (extracted, not committed)
+vendor/google/
+vendor/oneplus/
+vendor/qcom/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+
+# Rust
+target/
+Cargo.lock
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Keys (never commit signing keys)
+*.pem
+*.pk8
+*.x509.pem
+keys/
+
+# Large binary files
+*.img
+*.bin
+*.elf
+*.zip
+*.tar.gz
+*.tar.bz2
+
+# Device-specific firmware
+radio/*.img
+bootloader/*.img

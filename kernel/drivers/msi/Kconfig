@@ -1,0 +1,58 @@
+config MSI_SUBSTRATE
+	tristate "MSI Cognitive Substrate Interface"
+	default m
+	help
+	  Minimal Substrate Interface (MSI) v1.0 kernel module for
+	  ninjamagicOS. Provides cognitive execution primitives:
+	  Lanes (execution contexts), Events (topic pub/sub),
+	  Domains (capability containers), and addressable State.
+
+	  Based on the SingularisPrime MSI specification. This module
+	  enables AI-native workloads to run with kernel-level
+	  scheduling and zero-copy event delivery.
+
+	  If unsure, say M.
+
+config MSI_MAX_LANES
+	int "Maximum number of MSI lanes"
+	depends on MSI_SUBSTRATE
+	default 1024
+	help
+	  Maximum number of concurrent MSI execution lanes.
+	  Each lane maps to a kernel thread with cognitive
+	  scheduling policies (priority, energy budget, affinity).
+
+config MSI_MAX_DOMAINS
+	int "Maximum number of MSI domains"
+	depends on MSI_SUBSTRATE
+	default 256
+	help
+	  Maximum number of MSI capability domains.
+	  Each domain is a sealed container of grants that
+	  control what resources a cognitive program can access.
+
+config MSI_MAX_TOPICS
+	int "Maximum number of MSI event topics"
+	depends on MSI_SUBSTRATE
+	default 65536
+	help
+	  Maximum number of unique event topics in the MSI
+	  event bus. Topics use prefix-matching for subscriptions.
+
+config MSI_NPU_ACCEL
+	bool "Enable NPU acceleration for MSI AssocStore"
+	depends on MSI_SUBSTRATE
+	default y
+	help
+	  Use the Neural Processing Unit (TPU/Hexagon DSP) for
+	  hardware-accelerated vector operations in the MSI
+	  associative memory store. Falls back to CPU SIMD
+	  if NPU is unavailable.
+
+config MSI_DEBUG
+	bool "MSI debug logging"
+	depends on MSI_SUBSTRATE
+	default n
+	help
+	  Enable verbose debug logging for MSI operations.
+	  Useful for development but impacts performance.
