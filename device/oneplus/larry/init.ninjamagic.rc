@@ -1,0 +1,37 @@
+# init.ninjamagic.rc — ninjamagicOS init script for OnePlus Nord N30
+# Loaded by Android init during boot
+
+# === Phase 0: Load MSI kernel module ===
+on early-boot
+    # Load MSI cognitive substrate kernel module
+    insmod /vendor/lib/modules/msi.ko
+    chmod 0666 /dev/msi
+    chown system system /dev/msi
+
+# === Phase 1: Start NinjaMagic RILD ===
+service ninjamagic-rild /vendor/bin/ninjamagic-rild
+    class core
+    user radio
+    group radio cache inet misc audio log readproc wakelock
+    capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
+    socket rild stream 660 root radio
+    socket rild-debug stream 660 radio system
+    onrestart restart ninjamagic-agent
+
+# === Phase 2: Start NinjaMagic Agent ===
+service ninjamagic-agent /vendor/bin/ninjamagic-agent
+    class main
+    user system
+    group system input
+    capabilities NET_BIND_SERVICE
+    writepid /dev/cpuset/foreground/tasks
+    oneshot
+    restart_period 5
+
+# === Phase 3: Agent model preload ===
+on property:sys.boot_completed=1
+    setprop ninjamagic.agent.load_model 1
+
+# === MSI event bus debug (development only) ===
+on property:persist.ninjamagic.msi.debug=1
+    write /sys/module/msi/parameters/debug 1
