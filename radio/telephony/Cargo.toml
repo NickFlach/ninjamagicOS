@@ -1,0 +1,21 @@
+[package]
+name = "ninjamagic-telephony"
+version = "0.1.0"
+edition = "2021"
+description = "NinjaMagic Telephony Service — call manager and SMS manager running as MSI lanes"
+license = "Apache-2.0"
+
+[lib]
+name = "ninjamagic_telephony"
+path = "src/lib.rs"
+
+[dependencies]
+msi = { path = "../../msi/runtime" }
+log = "0.4"
+env_logger = "0.11"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+parking_lot = "0.12"
+
+[target.'cfg(target_os = "android")'.dependencies]
+android_logger = "0.14"

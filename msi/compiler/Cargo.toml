@@ -1,0 +1,22 @@
+[package]
+name = "sp-compiler"
+version = "0.1.0"
+edition = "2021"
+description = "Shinobi.Substrate (SP) compiler — parses SP cognitive programs and lowers them to MSI calls"
+license = "Apache-2.0"
+
+[lib]
+name = "sp_compiler"
+path = "src/lib.rs"
+
+[[bin]]
+name = "spc"
+path = "src/main.rs"
+
+[dependencies]
+msi = { path = "../runtime" }
+log = "0.4"
+env_logger = "0.11"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"

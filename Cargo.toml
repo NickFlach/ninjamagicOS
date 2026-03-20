@@ -2,7 +2,9 @@
 resolver = "2"
 members = [
     "msi/runtime",
+    "msi/compiler",
     "agent/core",
+    "radio/telephony",
 ]
 
 [workspace.package]
